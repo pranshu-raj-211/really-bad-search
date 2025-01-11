@@ -1,0 +1,2 @@
+SEARCH_TERM = ''
+LIST_API_URL=''
