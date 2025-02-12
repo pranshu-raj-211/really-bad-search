@@ -7,7 +7,7 @@ from datetime import datetime, timezone, timedelta
 from db.db_utils import save_records
 
 
-class YoutubeFetchService:
+class YoutubeFetchDaemon:
     def __init__(self):
         self.api_keys = youtube_api_keys
         self.key_generator = self._create_key_generator()
