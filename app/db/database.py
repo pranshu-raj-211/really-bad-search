@@ -6,7 +6,8 @@ COLLECTION_NAME = "videos"
 
 client = MongoClient(mongo_uri)
 db = client[DB_NAME]
-videos_collection = db[COLLECTION_NAME]
+videos = db[COLLECTION_NAME]
 
 # index on published_datetime for faster queries
-videos_collection.create_index([("published_datetime", ASCENDING)], unique=True)
+videos.create_index([("published_datetime", ASCENDING)], unique=True)
+videos.create_index([("video_id", 1)], unique=True)

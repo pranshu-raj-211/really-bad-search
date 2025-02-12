@@ -1,2 +1,2 @@
-SEARCH_TERM = ''
+SEARCH_TERM = 'cricket'
 LIST_API_URL=''
