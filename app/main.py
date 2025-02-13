@@ -12,6 +12,7 @@ fetch_daemon = YoutubeFetchDaemon()
 
 @asynccontextmanager
 async def lifespan():
+    """Manage startup and shutdown events."""
     # start daemon on app startup
     video_fetch_task = asyncio.create_task(fetch_daemon.start_fetching())
     logger.info('Started pulling videos from youtube.')
@@ -24,11 +25,19 @@ async def lifespan():
 
 @app.get("/")
 async def root() -> dict[str, str]:
+    """Root endpoint."""
     logger.info('Server up')
     return {"message": "Up and running"}
 
 @app.get("/videos", response_model=PaginatedResponse)
 async def get_videos(page: int = Query(1, ge=1), page_size: int = Query(10, ge=1, le=50)):
+    """
+    Get paginated video results.
+    
+    Args:
+    - page (int): Page number (starts from 1)
+    - page_size (int): Number of items per page (max 50)
+    """
     try:
         return await get_paginated_videos(page, page_size)
     except Exception as e:
